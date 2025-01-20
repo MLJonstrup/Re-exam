@@ -8,12 +8,13 @@ import { NavigationContainer } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons'; 
 import { getFirestore } from 'firebase/firestore';
 import { View, Text, TextInput, Button } from 'react-native';
-import globalStyles from './globalStyles';
-import dashboard from './components/home'; 
-import booking from './components/book';
-import history from './components/history';
-import profile from './components/profile';
-import settings from './components/settings';
+import dashboard from 'components/home'; 
+import booking from 'components/book';
+import history from 'components/history';
+import profile from 'components/profile';
+import settings from 'components/settings';
+import style from 'components/style'; 
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyADvL16QaGmXg8ezO35f2SHfuS7b-JOvfE",
@@ -53,16 +54,30 @@ function Login({ onLogin }) {
   };
 
   return (
-    <View style={globalStyles.container}>
-      <Text style={globalStyles.text}>{isSignUp ? 'Sign Up' : 'Login'}</Text>
-      <TextInput style={globalStyles.input} placeholder="Email" onChangeText={setEmail} value={email} />
-      <TextInput style={globalStyles.input} placeholder="Password" onChangeText={setPassword} value={password} secureTextEntry />
-      <Button title={isSignUp ? "Sign Up" : "Login"} onPress={isSignUp ? handleSignUp : handleLogin} />
-      <Button 
-        title={isSignUp ? "Have an account? Login" : "New user? Sign Up"} 
-        onPress={() => setIsSignUp(!isSignUp)} 
-      />
-    </View>
+      <View style={globalStyles.container}>
+        <Text style={globalStyles.text}>{isSignUp ? 'Sign Up' : 'Login'}</Text>
+        <TextInput 
+          style={globalStyles.input} 
+          placeholder="Email" 
+          onChangeText={setEmail} 
+          value={email} 
+        />
+        <TextInput 
+          style={globalStyles.input} 
+          placeholder="Password" 
+          onChangeText={setPassword} 
+          value={password} 
+          secureTextEntry 
+        />
+        <Button 
+          title={isSignUp ? "Sign Up" : "Login"} 
+          onPress={isSignUp ? handleSignUp : handleLogin} 
+        />
+        <Button 
+          title={isSignUp ? "Have an account? Login" : "New user? Sign Up"} 
+          onPress={() => setIsSignUp(!isSignUp)} 
+        />
+      </View>
   );
 }
 
