@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, Button, Alert } from 'react-native';
 import * as Location from 'expo-location';
 import { Picker } from '@react-native-picker/picker';
-import globalStyles from '../globalStyles';
 import { getAuth, signOut } from 'firebase/auth';
 import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore';
 
@@ -19,7 +18,7 @@ export default function Profile() {
   const userId = auth.currentUser?.uid;
 
   useEffect(() => {
-    //hent brugerens profil
+    // Fetch user profile
     const fetchProfile = async () => {
       const docRef = doc(db, 'users', userId);
       const docSnap = await getDoc(docRef);
@@ -36,7 +35,7 @@ export default function Profile() {
     }
   }, [userId]);
 
-  //gem ændringer i profilen
+  // Save profile changes
   const handleSave = async () => {
     try {
       const docRef = doc(db, 'users', userId);
@@ -49,8 +48,8 @@ export default function Profile() {
       alert('Failed to save profile');
     }
   };
-  
-//log ud
+
+  // Logout
   const handleLogout = async () => {
     try {
       await signOut(auth);
@@ -61,7 +60,7 @@ export default function Profile() {
     }
   };
 
-  //lokationen hentes og gemmes i profilen
+  // Fetch and update location in profile
   const fetchLocation = async () => {
     try {
       let { status } = await Location.requestForegroundPermissionsAsync();
@@ -86,18 +85,16 @@ export default function Profile() {
   };
 
   return (
-    <View style={globalStyles.container}>
-      <Text style={globalStyles.text}>Profile Page</Text>
+    <View>
+      <Text>Profile Page</Text>
 
       <TextInput
-        style={[globalStyles.input, isEditing && globalStyles.inputEditable]}
         value={profile.name}
         editable={isEditing}
         onChangeText={(text) => setProfile({ ...profile, name: text })}
         placeholder="Name"
       />
       <TextInput
-        style={[globalStyles.input, isEditing && globalStyles.inputEditable]}
         value={profile.email}
         editable={isEditing}
         onChangeText={(text) => setProfile({ ...profile, email: text })}
@@ -106,21 +103,19 @@ export default function Profile() {
 
       {/* Location Input */}
       <TextInput
-        style={[globalStyles.input, isEditing && globalStyles.inputEditable]}
         value={profile.location}
         editable={isEditing}
         onChangeText={(text) => setProfile({ ...profile, location: text })}
         placeholder="City (Enter manually or fetch)"
       />
       {isEditing && (
-        <Button style={globalStyles.button} title="Fetch Location" onPress={fetchLocation} />
+        <Button title="Fetch Location" onPress={fetchLocation} />
       )}
 
       {/* Picker for Role Selection */}
       {isEditing && (
         <Picker
           selectedValue={profile.role}
-          style={[globalStyles.picker, isEditing && globalStyles.inputEditable]}
           onValueChange={(itemValue) => setProfile({ ...profile, role: itemValue })}
         >
           <Picker.Item label="Trainer" value="Trainer" />
@@ -129,12 +124,12 @@ export default function Profile() {
       )}
 
       {isEditing ? (
-        <Button style={globalStyles.button} title="Save" onPress={handleSave} />
+        <Button title="Save" onPress={handleSave} />
       ) : (
-        <Button style={globalStyles.button} title="Edit" onPress={() => setIsEditing(true)} />
+        <Button title="Edit" onPress={() => setIsEditing(true)} />
       )}
 
-      <Button style={globalStyles.button} title="Logout" onPress={handleLogout} color="red" />
+      <Button title="Logout" onPress={handleLogout} color="red" />
     </View>
   );
 }

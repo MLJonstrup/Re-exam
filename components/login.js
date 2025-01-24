@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button } from 'react-native';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-import globalStyles from '../globalStyles';
 
 export default function Login({ navigation }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const auth = getAuth();
 
-  //login funktion
+  // Login function
   const handleLogin = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then(userCredential => {
@@ -21,16 +20,14 @@ export default function Login({ navigation }) {
   };
 
   return (
-    <View style={globalStyles.container}>
-      <Text style={globalStyles.text}>Login</Text>
+    <View>
+      <Text>Login</Text>
       <TextInput
-        style={globalStyles.input}
         placeholder="Email"
         value={email}
         onChangeText={setEmail}
       />
       <TextInput
-        style={globalStyles.input}
         placeholder="Password"
         value={password}
         secureTextEntry

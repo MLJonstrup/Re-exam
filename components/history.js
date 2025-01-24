@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, FlatList } from 'react-native';
-import globalStyles from '../globalStyles'; 
 import { getFirestore, collection, getDocs, query, where } from 'firebase/firestore'; 
 import { getAuth } from 'firebase/auth'; 
 import { StatusBar } from 'expo-status-bar';
@@ -61,24 +60,22 @@ export default function HomeComponent() {
   }, []);
 
   return (
-    <View style={globalStyles.container}>
-      <Text style={globalStyles.text}>Past Bookings:</Text>
+    <View>
+      <Text>Past Bookings:</Text>
       {pastEvents.length === 0 ? (
-        <Text style={globalStyles.eventText}>No past bookings available.</Text>
+        <Text>No past bookings available.</Text>
       ) : (
-        <View style={{ maxHeight: 300, width: '100%' }}>
-          <FlatList
-            data={pastEvents}
-            keyExtractor={(item) => item.id}
-            renderItem={({ item }) => (
-              <View style={globalStyles.eventItem}>
-                <Text style={globalStyles.eventText}>
-                  {item.sport} - {item.date} at {item.time}
-                </Text>
-              </View>
-            )}
-          />
-        </View>
+        <FlatList
+          data={pastEvents}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => (
+            <View>
+              <Text>
+                {item.sport} - {item.date} at {item.time}
+              </Text>
+            </View>
+          )}
+        />
       )}
       <StatusBar style="auto" />
     </View>

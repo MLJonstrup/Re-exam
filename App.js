@@ -2,20 +2,22 @@ import React, { useState, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { getApps, initializeApp } from 'firebase/app';
 import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
-import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
-import { Ionicons } from '@expo/vector-icons'; 
-import { getFirestore } from 'firebase/firestore';
-import { View, Text, TextInput, Button } from 'react-native';
-import dashboard from 'components/home'; 
-import booking from 'components/book';
-import history from 'components/history';
-import profile from 'components/profile';
-import settings from 'components/settings';
-import style from 'components/style'; 
+import { Ionicons } from '@expo/vector-icons';
+import { View, Text, TextInput, TouchableOpacity } from 'react-native'; // Changed Button to TouchableOpacity
 
+// Import screens
+import dashboard from './components/home'; 
+import booking from './components/book';
+import history from './components/history';
+import profile from './components/profile';
+import settings from './components/settings';
 
+// Import Global Styles
+import { GlobalStyle } from './styles/globalstyles'; // Assuming your styles are in this file
+
+// Firebase Setup
 const firebaseConfig = {
   apiKey: "AIzaSyADvL16QaGmXg8ezO35f2SHfuS7b-JOvfE",
   authDomain: "ovelseinnt.firebaseapp.com",
@@ -25,17 +27,13 @@ const firebaseConfig = {
   appId: "1:650756283665:web:3aedccd7112f60a494c0b0",
 };
 
-// Opstart af Firebase
 if (!getApps().length) {
   initializeApp(firebaseConfig);
 }
-const auth = getAuth();
-const db = getFirestore();
 
-const Stack = createStackNavigator();
+const auth = getAuth();
 const Tab = createBottomTabNavigator();
 
-//Login function
 function Login({ onLogin }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -54,30 +52,45 @@ function Login({ onLogin }) {
   };
 
   return (
-      <View style={globalStyles.container}>
-        <Text style={globalStyles.text}>{isSignUp ? 'Sign Up' : 'Login'}</Text>
-        <TextInput 
-          style={globalStyles.input} 
-          placeholder="Email" 
-          onChangeText={setEmail} 
-          value={email} 
-        />
-        <TextInput 
-          style={globalStyles.input} 
-          placeholder="Password" 
-          onChangeText={setPassword} 
-          value={password} 
-          secureTextEntry 
-        />
-        <Button 
-          title={isSignUp ? "Sign Up" : "Login"} 
-          onPress={isSignUp ? handleSignUp : handleLogin} 
-        />
-        <Button 
-          title={isSignUp ? "Have an account? Login" : "New user? Sign Up"} 
-          onPress={() => setIsSignUp(!isSignUp)} 
-        />
+    <View style={GlobalStyle.container}>
+      <Text>{isSignUp ? 'Sign Up' : 'Login'}</Text>
+      <TextInput 
+        placeholder="Email" 
+        onChangeText={setEmail} 
+        value={email} 
+        style={GlobalStyle.textInput}
+      />
+      <TextInput 
+        placeholder="Password" 
+        onChangeText={setPassword} 
+        value={password} 
+        secureTextEntry 
+        style={GlobalStyle.textInput}
+      />
+      
+      {/* Custom Buttons with the same style as TextInput */}
+      <View style={GlobalStyle.buttonContainer}>
+        <TouchableOpacity 
+          style={GlobalStyle.primaryBtn} 
+          onPress={isSignUp ? handleSignUp : handleLogin}
+        >
+          <Text style={GlobalStyle.primaryBtnText}>
+            {isSignUp ? "Sign Up" : "Login"}
+          </Text>
+        </TouchableOpacity>
       </View>
+
+      <View style={GlobalStyle.buttonContainer}>
+        <TouchableOpacity 
+          style={GlobalStyle.secondaryBtn} 
+          onPress={() => setIsSignUp(!isSignUp)}
+        >
+          <Text style={GlobalStyle.secondaryBtnText}>
+            {isSignUp ? "Have an account? Login" : "New user? Sign Up"}
+          </Text>
+        </TouchableOpacity>
+      </View>
+    </View>
   );
 }
 
@@ -88,17 +101,6 @@ export default function App() {
     const unsubscribe = onAuthStateChanged(auth, user => setUser(user));
     return unsubscribe;
   }, []);
-
-  //Navigationen er herunder
-  const StackNavigation = () => (
-    <Stack.Navigator>
-      <Stack.Screen name="Home" component={dashboard} />
-      <Stack.Screen name="Booking" component={booking} />
-      <Stack.Screen name="History" component={history} />
-      <Stack.Screen name="Profile" component={profile} />
-      <Stack.Screen name="Settings" component={settings} />
-    </Stack.Navigator>
-  );
 
   return (
     <NavigationContainer>
