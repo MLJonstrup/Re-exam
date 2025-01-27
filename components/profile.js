@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, Button, Alert } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Alert } from 'react-native';
 import * as Location from 'expo-location';
 import { Picker } from '@react-native-picker/picker';
 import { getAuth, signOut } from 'firebase/auth';
 import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore';
+import { GlobalStyle } from '../styles/globalstyles'; // Assuming styles are stored here
 
 export default function Profile() {
   const [profile, setProfile] = useState({
@@ -85,16 +86,18 @@ export default function Profile() {
   };
 
   return (
-    <View>
-      <Text>Profile Page</Text>
+    <View style={GlobalStyle.container}>
+      <Text style={GlobalStyle.heading}>Profile Page</Text>
 
       <TextInput
+        style={GlobalStyle.input}
         value={profile.name}
         editable={isEditing}
         onChangeText={(text) => setProfile({ ...profile, name: text })}
         placeholder="Name"
       />
       <TextInput
+        style={GlobalStyle.input}
         value={profile.email}
         editable={isEditing}
         onChangeText={(text) => setProfile({ ...profile, email: text })}
@@ -103,13 +106,18 @@ export default function Profile() {
 
       {/* Location Input */}
       <TextInput
+        style={GlobalStyle.input}
         value={profile.location}
         editable={isEditing}
         onChangeText={(text) => setProfile({ ...profile, location: text })}
         placeholder="City (Enter manually or fetch)"
       />
       {isEditing && (
-        <Button title="Fetch Location" onPress={fetchLocation} />
+        <TouchableOpacity 
+          style={GlobalStyle.secondaryBtn} 
+          onPress={fetchLocation}>
+          <Text style={GlobalStyle.secondaryBtnText}>Fetch Location</Text>
+        </TouchableOpacity>
       )}
 
       {/* Picker for Role Selection */}
@@ -117,6 +125,7 @@ export default function Profile() {
         <Picker
           selectedValue={profile.role}
           onValueChange={(itemValue) => setProfile({ ...profile, role: itemValue })}
+          style={GlobalStyle.picker}
         >
           <Picker.Item label="Trainer" value="Trainer" />
           <Picker.Item label="Client" value="Client" />
@@ -124,12 +133,24 @@ export default function Profile() {
       )}
 
       {isEditing ? (
-        <Button title="Save" onPress={handleSave} />
+        <TouchableOpacity 
+          style={GlobalStyle.secondaryBtn} 
+          onPress={handleSave}>
+          <Text style={GlobalStyle.secondaryBtnText}>Save</Text>
+        </TouchableOpacity>
       ) : (
-        <Button title="Edit" onPress={() => setIsEditing(true)} />
+        <TouchableOpacity 
+          style={GlobalStyle.secondaryBtn} 
+          onPress={() => setIsEditing(true)}>
+          <Text style={GlobalStyle.secondaryBtnText}>Edit</Text>
+        </TouchableOpacity>
       )}
 
-      <Button title="Logout" onPress={handleLogout} color="red" />
+      <TouchableOpacity 
+        style={GlobalStyle.secondaryBtn} 
+        onPress={handleLogout}>
+        <Text style={GlobalStyle.secondaryBtnText}>Logout</Text>
+      </TouchableOpacity>
     </View>
   );
 }

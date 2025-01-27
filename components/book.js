@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Button } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native'; // Changed Button to TouchableOpacity
 import { Picker } from '@react-native-picker/picker';
 import { StatusBar } from 'expo-status-bar';
 import { getFirestore, collection, addDoc } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
+import { GlobalStyle } from '../styles/globalstyles'; // Assuming styles are stored here
 
 export default function BookingComponent() {
   const [selectedSport, setSelectedSport] = useState('');
@@ -55,13 +56,14 @@ export default function BookingComponent() {
   }, []);
 
   return (
-    <View>
-      <Text>Create booking here:</Text>
+    <View style={GlobalStyle.container}>
+      <Text style={GlobalStyle.heading}>Create Booking Here:</Text>
 
-      <Text>Select Sport:</Text>
+      <Text style={GlobalStyle.subText}>Select Sport:</Text>
       <Picker
         selectedValue={selectedSport}
         onValueChange={(itemValue) => setSelectedSport(itemValue)}
+        style={GlobalStyle.picker}
       >
         <Picker.Item label="Select Sport" value="" />
         <Picker.Item label="Soccer" value="soccer" />
@@ -69,10 +71,11 @@ export default function BookingComponent() {
         <Picker.Item label="Tennis" value="tennis" />
       </Picker>
 
-      <Text>Select Time:</Text>
+      <Text style={GlobalStyle.subText}>Select Time:</Text>
       <Picker
         selectedValue={selectedTime}
         onValueChange={(itemValue) => setSelectedTime(itemValue)}
+        style={GlobalStyle.picker}
       >
         <Picker.Item label="Select Time" value="" />
         <Picker.Item label="8:00 AM" value="8:00 AM" />
@@ -81,10 +84,11 @@ export default function BookingComponent() {
         <Picker.Item label="2:00 PM" value="2:00 PM" />
       </Picker>
 
-      <Text>Select Date:</Text>
+      <Text style={GlobalStyle.subText}>Select Date:</Text>
       <Picker
         selectedValue={selectedDate}
         onValueChange={(itemValue) => setSelectedDate(itemValue)}
+        style={GlobalStyle.picker}
       >
         <Picker.Item label="Select Date" value="" />
         {futureDates.map((date, index) => (
@@ -92,7 +96,13 @@ export default function BookingComponent() {
         ))}
       </Picker>
 
-      <Button title="Book Time" onPress={handleBooking} />
+      <View style={GlobalStyle.buttonContainer}>
+        <TouchableOpacity 
+          style={GlobalStyle.secondaryBtn} 
+          onPress={handleBooking}>
+          <Text style={GlobalStyle.secondaryBtnText}>Book Time</Text>
+        </TouchableOpacity>
+      </View>
       <StatusBar style="auto" />
     </View>
   );

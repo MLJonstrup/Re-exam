@@ -1,13 +1,12 @@
 import { StyleSheet } from "react-native";
 
 export const GlobalStyle = StyleSheet.create({
-    // Container 
+    // Container
     container: {
         flex: 1,
-        backgroundColor: '#FFF2F2',
         alignItems: 'center',
         justifyContent: 'center',
-        padding: 20,  // Padding for the container
+        padding: 20, // Padding for the container
     },
 
     // TextInputComponent
@@ -19,13 +18,13 @@ export const GlobalStyle = StyleSheet.create({
         borderRadius: 10,
         paddingLeft: 16,
         borderWidth: 1,
-        marginBottom: 15,  // Margin between TextInput fields
+        marginBottom: 15, // Margin between TextInput fields
     },
 
     // ButtonComponent
     buttonContainer: {
-        width: 300,  // Ensure buttons are the same width as text inputs
-        marginBottom: 15,  // Space between buttons
+        width: 300, // Ensure buttons are the same width as text inputs
+        marginBottom: 15, // Space between buttons
     },
 
     primaryBtn: {
@@ -35,7 +34,7 @@ export const GlobalStyle = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         shadowColor: 'black',
-        shadowOffset: {width: 0, height: 2},
+        shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.25,
         shadowRadius: 2,
     },
@@ -56,7 +55,7 @@ export const GlobalStyle = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         shadowColor: 'black',
-        shadowOffset: {width: 0, height: 2},
+        shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.25,
         shadowRadius: 2,
     },
@@ -68,4 +67,52 @@ export const GlobalStyle = StyleSheet.create({
         fontWeight: 'bold',
     },
 
+    // Additional Styles
+    heading: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        marginBottom: 16,
+        color: '#333',
+    },
+    subText: {
+        fontSize: 16,
+        color: '#666',
+    },
+    itemContainer: {
+        marginBottom: 12,
+        padding: 12,
+        borderRadius: 8,
+        backgroundColor: '#fff',
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.1,
+        shadowRadius: 4,
+        elevation: 2,
+    },
+    itemText: {
+        fontSize: 16,
+        color: '#333',
+    },
+
+    picker: {
+        height: 60, // Minimum height for the picker
+        width: '100%', // Use the full width of the container
+        marginVertical: 8, // Add spacing
+    },
+
+    // Light Mode Styles
+    lightContainer: {
+        backgroundColor: '#FFF2F2',
+    },
+    lightText: {
+        color: '#333',
+    },
+
+    // Dark Mode Styles
+    darkContainer: {
+        backgroundColor: '#333',
+    },
+    darkText: {
+        color: '#fff',
+    },
 });
