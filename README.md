@@ -2,8 +2,8 @@ Hejsa,
 
 Her er et par ting som er gode at vide. 
 
-## YouTube video
-    Youtube link:
+## Video
+    Google photos link: https://photos.app.goo.gl/RmBwNJ5Mndaovbhq9
 
 ## Mappestruktur
 **Re-exam**
