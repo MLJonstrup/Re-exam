@@ -6,22 +6,19 @@ Her er et par ting som er gode at vide.
     Youtube link:
 
 ## Mappestruktur
-1. **Re-exam**
-    1.1 .expo
-        Contains expo standard files
-    1.2 assets
-        a few images, icons etc.
-    1.3 components
-        all components such as book.js, history.js, home.js
-    1.4 styles
-        just one file, globalstyles.js
+**Re-exam**
 
-    .gitignore
-    app.js
-    babel.config.js
-    package-lock.json
-    package.json
-    README.md
+- **`assets/`**: Contains a few images, icons, and other assets used throughout the app.
+- **`components/`**: Includes reusable components like `Book.js`, `History.js`, `Home.js`, etc.
+- **`styles/`**: Contains a single style file `globalstyles.js` for global styling of the application.
+
+- **`expo/`**: Includes standard Expo files necessary for the project setup.
+- **`app.js`**: The main entry point of the application, where the app is initialized.
+- **`babel.config.js`**: Babel configuration for the project.
+- **`package-lock.json`**: Automatically generated file that locks the versions of dependencies.
+- **`package.json`**: Contains the metadata and dependencies for the project.
+
+- **`.gitignore`**: Specifies which files and directories Git should ignore to avoid tracking unnecessary files.
 
 ## Opsætning & Installation
 
