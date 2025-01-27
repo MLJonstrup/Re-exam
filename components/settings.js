@@ -1,35 +1,35 @@
 import React from 'react';
 import { Text, View, Switch, TouchableOpacity } from 'react-native';
-import { GlobalStyle } from '../styles/globalstyles'; // Assuming styles are stored here
+import { GlobalStyle } from '../styles/globalstyles'; 
 
 export default function Settings() {
-  const [isDarkMode, setIsDarkMode] = React.useState(false);
+  const [isDarkMode, setIsDarkMode] = React.useState(false);  // State til at holde styr på om mørk tilstand er aktiveret
 
-  // Toggles the dark mode setting
+  // Funktion til at skifte mellem mørk og lys tilstand
   const toggleTheme = () => {
-    setIsDarkMode(previousState => !previousState);
+    setIsDarkMode(previousState => !previousState);  // Skift tilstanden
   };
 
   return (
     <View style={GlobalStyle.container}>
-      <Text style={GlobalStyle.heading}>Settings</Text>
+      <Text style={GlobalStyle.heading}>Indstillinger</Text>
       
       <View style={GlobalStyle.settingItem}>
-        <Text style={GlobalStyle.subText}>Dark Mode</Text>
+        <Text style={GlobalStyle.subText}>Mørk tilstand</Text>
         <Switch
-          onValueChange={toggleTheme}
-          value={isDarkMode}
-          trackColor={{ false: "#767577", true: "#81b0ff" }}
-          thumbColor={isDarkMode ? "#f5dd4b" : "#f4f3f4"}
+          onValueChange={toggleTheme}  // Når værdien ændres, kaldes toggleTheme funktionen
+          value={isDarkMode}  // Sætter værdien af switch baseret på isDarkMode
+          trackColor={{ false: "#767577", true: "#81b0ff" }}  // Farve på switch track (baggrund)
+          thumbColor={isDarkMode ? "#f5dd4b" : "#f4f3f4"}  // Farve på switch thumb (knappen)
         />
       </View>
 
-      {/* You can add more settings options here */}
+      {/* Flere indstillingsmuligheder kan tilføjes her */}
       
       <TouchableOpacity 
         style={GlobalStyle.secondaryBtn}
-        onPress={() => alert('Settings saved!')}>
-        <Text style={GlobalStyle.secondaryBtnText}>Save Settings</Text>
+        onPress={() => alert('Indstillinger gemt!')}>  {/* Simuler gemmehandling */}
+        <Text style={GlobalStyle.secondaryBtnText}>Gem Indstillinger</Text>
       </TouchableOpacity>
     </View>
   );

@@ -5,19 +5,19 @@ import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, createUserWith
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
-import { View, Text, TextInput, TouchableOpacity } from 'react-native'; // Changed Button to TouchableOpacity
+import { View, Text, TextInput, TouchableOpacity } from 'react-native'; 
 
-// Import screens
+// Importerer skærme til navigation
 import dashboard from './components/home'; 
 import booking from './components/book';
 import history from './components/history';
 import profile from './components/profile';
 import settings from './components/settings';
 
-// Import Global Styles
-import { GlobalStyle } from './styles/globalstyles'; // Assuming your styles are in this file
+// Importerer globale stilarter
+import { GlobalStyle } from './styles/globalstyles';
 
-// Firebase Setup
+// Firebase opsætning: Konfigurer Firebase
 const firebaseConfig = {
   apiKey: "AIzaSyADvL16QaGmXg8ezO35f2SHfuS7b-JOvfE",
   authDomain: "ovelseinnt.firebaseapp.com",
@@ -27,6 +27,7 @@ const firebaseConfig = {
   appId: "1:650756283665:web:3aedccd7112f60a494c0b0",
 };
 
+// Initialiserer Firebase, hvis den ikke allerede er initialiseret
 if (!getApps().length) {
   initializeApp(firebaseConfig);
 }
@@ -34,26 +35,29 @@ if (!getApps().length) {
 const auth = getAuth();
 const Tab = createBottomTabNavigator();
 
+// Login-komponent for brugerens autentificering (Login eller Sign-up)
 function Login({ onLogin }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isSignUp, setIsSignUp] = useState(false);
 
+  // Håndter login med email og adgangskode
   const handleLogin = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then(userCredential => onLogin(userCredential.user))
-      .catch(error => console.error('Login error:', error));
+      .catch(error => console.error('Login fejl:', error));
   };
 
+  // Håndter sign-up med email og adgangskode
   const handleSignUp = () => {
     createUserWithEmailAndPassword(auth, email, password)
       .then(userCredential => onLogin(userCredential.user))
-      .catch(error => console.error('Sign-up error:', error));
+      .catch(error => console.error('Sign-up fejl:', error));
   };
 
   return (
     <View style={GlobalStyle.container}>
-      <Text>{isSignUp ? 'Sign Up' : 'Login'}</Text>
+      <Text>{isSignUp ? 'Opret konto' : 'Login'}</Text>
       <TextInput 
         placeholder="Email" 
         onChangeText={setEmail} 
@@ -61,32 +65,33 @@ function Login({ onLogin }) {
         style={GlobalStyle.textInput}
       />
       <TextInput 
-        placeholder="Password" 
+        placeholder="Adgangskode" 
         onChangeText={setPassword} 
         value={password} 
         secureTextEntry 
         style={GlobalStyle.textInput}
       />
       
-      {/* Custom Buttons with the same style as TextInput */}
+      {/* Login/Sign-up knap */}
       <View style={GlobalStyle.buttonContainer}>
         <TouchableOpacity 
           style={GlobalStyle.primaryBtn} 
           onPress={isSignUp ? handleSignUp : handleLogin}
         >
           <Text style={GlobalStyle.primaryBtnText}>
-            {isSignUp ? "Sign Up" : "Login"}
+            {isSignUp ? "Opret konto" : "Login"}
           </Text>
         </TouchableOpacity>
       </View>
 
+      {/* Skift mellem Login og Sign-up formularer */}
       <View style={GlobalStyle.buttonContainer}>
         <TouchableOpacity 
           style={GlobalStyle.secondaryBtn} 
           onPress={() => setIsSignUp(!isSignUp)}
         >
           <Text style={GlobalStyle.secondaryBtnText}>
-            {isSignUp ? "Have an account? Login" : "New user? Sign Up"}
+            {isSignUp ? "Har du en konto? Login" : "Ny bruger? Opret konto"}
           </Text>
         </TouchableOpacity>
       </View>
@@ -94,9 +99,11 @@ function Login({ onLogin }) {
   );
 }
 
+// Hoved App-komponent med navigation og autentificeringstjek
 export default function App() {
   const [user, setUser] = useState(null);
 
+  // Sætter op en lytter til ændringer i brugerens autentificeringstilstand
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, user => setUser(user));
     return unsubscribe;
@@ -105,6 +112,7 @@ export default function App() {
   return (
     <NavigationContainer>
       {user ? (
+        // Hvis brugeren er autentificeret, vis bottom tab navigation med forskellige skærme
         <Tab.Navigator>
           <Tab.Screen 
             name="Home" 
@@ -148,6 +156,7 @@ export default function App() {
           />
         </Tab.Navigator>
       ) : (
+        // Hvis ingen bruger er autentificeret, vis Login-skærmen
         <Login onLogin={setUser} />
       )}
       <StatusBar style="auto" />

@@ -6,7 +6,7 @@ export const GlobalStyle = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        padding: 20, // Padding for the container
+        padding: 20,
     },
 
     // TextInputComponent
@@ -18,13 +18,13 @@ export const GlobalStyle = StyleSheet.create({
         borderRadius: 10,
         paddingLeft: 16,
         borderWidth: 1,
-        marginBottom: 15, // Margin between TextInput fields
+        marginBottom: 15, 
     },
 
     // ButtonComponent
     buttonContainer: {
-        width: 300, // Ensure buttons are the same width as text inputs
-        marginBottom: 15, // Space between buttons
+        width: 300, 
+        marginBottom: 15, 
     },
 
     primaryBtn: {
@@ -95,9 +95,9 @@ export const GlobalStyle = StyleSheet.create({
     },
 
     picker: {
-        height: 60, // Minimum height for the picker
-        width: '100%', // Use the full width of the container
-        marginVertical: 8, // Add spacing
+        height: 60, 
+        width: '100%', 
+        marginVertical: 8, 
     },
 
     // Light Mode Styles

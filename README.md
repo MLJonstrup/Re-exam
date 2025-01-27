@@ -35,7 +35,7 @@ Her er et par ting som er gode at vide.
 
 4. **Kør appen:**
    ```bash
-   npx expo start -tunnel
+   npx expo start --tunnel
    ```
 
 ## Kilder og afsluttende
