@@ -23,7 +23,6 @@ Her er et par ting som er gode at vide.
     package.json
     README.md
 
-
 ## Opsætning & Installation
 
 1. **Klon repository:**
@@ -42,6 +41,7 @@ Her er et par ting som er gode at vide.
    npx expo start -tunnel
    ```
 
+## Kilder og afsluttende
 Jeg har udviklet dette kodeprodukt, i samarbejde med ChatGPT.
 OpenAI. (2024). ChatGPT (Januar version) [Large Language Model]. https://chatgpt.com
 
