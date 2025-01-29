@@ -79,7 +79,7 @@ export default function HomeComponent() {
           renderItem={({ item }) => (
             <View style={GlobalStyle.itemContainer}>
               <Text style={GlobalStyle.itemText}>
-                {item.sport} - {item.date} at {item.time}  // Vis sport, dato og tid for booking
+                {item.sport} - {item.date} at {item.time}  
               </Text>
             </View>
           )}
